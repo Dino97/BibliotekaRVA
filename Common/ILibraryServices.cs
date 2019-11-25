@@ -5,13 +5,23 @@ using System.ServiceModel;
 
 namespace Biblioteka
 {
+	public enum LogInInfo
+	{
+		WrongUserOrPass,
+		AlreadyConnected,
+		Sucess
+	}
+
 	[ServiceContract]
 	public interface ILibraryServices
 	{
 		[OperationContract]
-		bool LogIn(string username, string password);
+		LogInInfo LogIn(string username, string password);
 
 		[OperationContract]
 		List<Book> GetBooks();
+
+		[OperationContract(IsOneWay = true)]
+		void DuplicateBook(Book book);
 	}
 }

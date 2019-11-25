@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
 		xmlns:views="clr-namespace:Client.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="800" MinWidth="640" MinHeight="480">
+        Title="Library" Height="480" Width="800" MinWidth="640" MinHeight="480">
     <Grid>
 		<!--
 		<StackPanel>

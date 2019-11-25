@@ -24,7 +24,10 @@ namespace Server.Migrations
 				context.Authors.AddOrUpdate(a);
 
 			// Members
-			context.Members.AddOrUpdate(new Member() { FirstName = "Dino", LastName = "T", Username = "Dino", Password = "1234" });
+			context.Members.AddOrUpdate(new Member() { FirstName = "Dino", LastName = "T", Username = "dino", Password = "1234" });
+
+			// Admins
+			context.Admins.AddOrUpdate(new Admin() { FirstName = "", LastName = "", Username = "admin", Password = "admin" });
 
 			// Books
 			IList<Book> defaultBooks = new List<Book>();

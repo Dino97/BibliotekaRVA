@@ -14,9 +14,10 @@ namespace Client.ViewModel
 	public class LoginViewModel : ViewModelBase
 	{
 		public string Username { get; set; }
-		public string ErrorText { get; set; }
 
 		public Command<object> LoginCommand { get; set; }
+
+		private string errorText;
 
 
 
@@ -25,19 +26,31 @@ namespace Client.ViewModel
 			LoginCommand = new Command<object>(Login);
 		}
 
+		#region Properties
+		public string ErrorText
+		{
+			get { return errorText; }
+			set
+			{
+				errorText = value;
+				OnPropertyChanged("ErrorText");
+			}
+		}
+		#endregion
+
 		private void Login(object parameter)
 		{
 			CurrentViewModel = new MainViewModel();
 
 			PasswordBox pass = parameter as PasswordBox;
 
-			bool loginSuccess;
+			LogInInfo loginInfo;
 			using (var c = new WaitCursor())
 			{
-				loginSuccess = Session.Current.LibraryProxy.LogIn(Username, pass.Password);
+				loginInfo = Session.Current.LibraryProxy.LogIn(Username, pass.Password);
 			}
 
-			if (loginSuccess)
+			if (loginInfo == LogInInfo.Sucess)
 			{
 				MainWindow mw = new MainWindow();
 				mw.Show();
@@ -47,7 +60,10 @@ namespace Client.ViewModel
 			}
 			else
 			{
-				ErrorText = "Username or password is incorrect.";
+				if (loginInfo == LogInInfo.WrongUserOrPass)
+					ErrorText = "Username or password is incorrect.";
+				else
+					ErrorText = "Account already connected.";
 			}
 		}
 	}

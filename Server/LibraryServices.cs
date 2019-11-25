@@ -10,32 +10,62 @@ namespace Server
 {
 	class LibraryServices : ILibraryServices
 	{
+		private static List<string> loggedInUsers = new List<string>();
 
-		public bool LogIn(string username, string password)
+
+		public LogInInfo LogIn(string username, string password)
 		{
 			using(var db = new LibraryDbContext())
 			{
 				IUser user = db.Members.FirstOrDefault(u => u.Username.Equals(username));
 
+				// if not found in users, look in admins
+				if(user == null)
+					user = db.Admins.FirstOrDefault(a => a.Username.Equals(username));
+
+				// if still null, wrong username
 				if (user == null)
-					return false;
+					return LogInInfo.WrongUserOrPass;
+
+				// already logged in
+				if (loggedInUsers.Contains(username))
+					return LogInInfo.AlreadyConnected;
 
 				if (user.Password == password)
 				{
 					Console.WriteLine("User " + username + " connected.");
-					return true;
+					loggedInUsers.Add(username);
+
+					return LogInInfo.Sucess;
 				}
 
-				return false;
+				// wrong password
+				return LogInInfo.WrongUserOrPass;
 			}
 		}
 
 		public List<Book> GetBooks()
 		{
-			using(var db = new LibraryDbContext())
+			using (var db = new LibraryDbContext())
 			{
-				var res = db.Books.Include("Author").ToList();
-				return res;
+				return db.Books.Include("Author").ToList();
+			}
+		}
+
+		public void DuplicateBook(Book book)
+		{
+			List<Book> books = GetBooks();
+
+			Book toClone = books.Find(b => b.BookId == book.BookId);
+			Book clone = (Book)toClone.Clone();
+
+			using (var db = new LibraryDbContext())
+			{
+				db.Authors.Attach(clone.Author);
+				db.Books.Add(clone);
+				db.SaveChanges();
+
+				Console.WriteLine("Book " + book.BookName + " duplicated.");
 			}
 		}
 	}
