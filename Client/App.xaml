@@ -4,13 +4,14 @@
              xmlns:local="clr-namespace:Client"
 			 xmlns:Views="clr-namespace:Client.View"
 			 xmlns:ViewModels="clr-namespace:Client.ViewModel"
-             StartupUri="LoginWindow.xaml">
+             StartupUri="LoginWindow.xaml"
+			 Exit="OnApplicationExit">
 	<Application.Resources>
-		<DataTemplate DataType="{x:Type ViewModels:LoginViewModel}">
+		<!--<DataTemplate DataType="{x:Type ViewModels:LoginViewModel}">
 			<Views:Login/>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type ViewModels:MainViewModel}">
 			<Views:Main/>
-		</DataTemplate>
+		</DataTemplate>-->
 	</Application.Resources>
 </Application>

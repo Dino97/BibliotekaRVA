@@ -13,7 +13,7 @@ namespace Client
 		private static Session current;
 
 		public ILibraryServices LibraryProxy { get; private set; }
-
+		public string LoggedInUser { get; set; }
 
 
 
@@ -32,6 +32,16 @@ namespace Client
 		{
 			ChannelFactory<ILibraryServices> cf = new ChannelFactory<ILibraryServices>(new NetTcpBinding(), "net.tcp://localhost:9000");
 			LibraryProxy = cf.CreateChannel();
+
+			LoggedInUser = string.Empty;
+		}
+
+		public void Abandon()
+		{
+			if(!LoggedInUser.Equals(string.Empty))
+				LibraryProxy.LogOut(LoggedInUser);
+
+			current = null;
 		}
 	}
 }

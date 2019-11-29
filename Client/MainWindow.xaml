@@ -22,8 +22,16 @@
 			<views:Login VerticalAlignment="Stretch" Height="430"/>
 			<ContentControl Content="{Binding CurrentViewModel}"/>
 		</StackPanel>-->
-
-		<Label Content="Test"/>
-		<views:Main/>
+		<TabControl>
+			<TabItem Header="Main">
+				<views:MainView/>
+			</TabItem>
+			<TabItem Header="Account">
+				<views:AccountView/>
+			</TabItem>
+			<TabItem Header="Admin" Visibility="Visible">
+				
+			</TabItem>
+		</TabControl>
 	</Grid>
 </Window>

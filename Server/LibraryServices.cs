@@ -13,6 +13,7 @@ namespace Server
 		private static List<string> loggedInUsers = new List<string>();
 
 
+
 		public LogInInfo LogIn(string username, string password)
 		{
 			using(var db = new LibraryDbContext())
@@ -42,6 +43,11 @@ namespace Server
 				// wrong password
 				return LogInInfo.WrongUserOrPass;
 			}
+		}
+
+		public void LogOut(string username)
+		{
+			Console.WriteLine("User " + username + " disconnected.");
 		}
 
 		public List<Book> GetBooks()

@@ -22,6 +22,11 @@ namespace Client
 			canExecuteMethod = canExecute;
 		}
 
+		public void RaiseCanExecuteChanged()
+		{
+			CanExecuteChanged(this, EventArgs.Empty);
+		}
+
 		public bool CanExecute(object parameter)
 		{
 			return canExecuteMethod != null ? canExecuteMethod() : callback != null;
@@ -47,6 +52,11 @@ namespace Client
 		{
 			callback = callbackFunc;
 			canExecuteMethod = canExecute;
+		}
+
+		public void RaiseCanExecuteChanged()
+		{
+			CanExecuteChanged(this, EventArgs.Empty);
 		}
 
 		public bool CanExecute(object parameter)

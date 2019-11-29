@@ -18,6 +18,9 @@ namespace Biblioteka
 		[OperationContract]
 		LogInInfo LogIn(string username, string password);
 
+		[OperationContract(IsOneWay = true)]
+		void LogOut(string username);
+
 		[OperationContract]
 		List<Book> GetBooks();
 

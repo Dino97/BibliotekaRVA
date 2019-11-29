@@ -13,5 +13,9 @@ namespace Client
 	/// </summary>
 	public partial class App : Application
 	{
+		private void OnApplicationExit(object sender, ExitEventArgs e)
+		{
+			Session.Current.Abandon();
+		}
 	}
 }

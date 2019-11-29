@@ -57,6 +57,8 @@ namespace Client.ViewModel
 
 				Application.Current.MainWindow.Close();
 				Application.Current.MainWindow = mw;
+
+				Session.Current.LoggedInUser = Username;
 			}
 			else
 			{
