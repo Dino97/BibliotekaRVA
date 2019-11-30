@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,5 +70,35 @@ namespace Client
 			if (callback != null)
 				callback((T)parameter);
 		}
+	}
+
+	class RevertableCommand : Command
+	{
+		private Action revert;
+
+
+
+		public RevertableCommand(Action executeFunc, Action revertFunc) : base(executeFunc)
+		{
+			revert = revertFunc;
+		}
+
+		public void Revert()
+		{
+			if (revert != null)
+				revert();
+		}
+	}
+
+	enum ActionType
+	{
+		Edit,
+		Delete,
+		Add
+	}
+
+	class UndoRedoAction
+	{
+
 	}
 }

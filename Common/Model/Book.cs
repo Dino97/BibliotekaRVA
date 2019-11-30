@@ -6,11 +6,11 @@ namespace Common.Model
 {
     public class Book : ICloneable
     {
-		public int BookId { get; set; }
+		[Key]
 		public string BookName { get; set; }
 		public int PublicationYear { get; set; }
 		public Author Author { get; set; }
-		public Member LeasedTo { get; set; }
+		public string LeasedTo { get; set; }
 
 
 
@@ -20,7 +20,7 @@ namespace Common.Model
 			res.BookName = BookName;
 			res.PublicationYear = PublicationYear;
 			res.Author = Author;
-			res.LeasedTo = null;
+			res.LeasedTo = string.Empty;
 
 			return res;
 		}

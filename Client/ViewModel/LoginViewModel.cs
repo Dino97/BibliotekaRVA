@@ -14,7 +14,6 @@ namespace Client.ViewModel
 	public class LoginViewModel : ViewModelBase
 	{
 		public string Username { get; set; }
-
 		public Command<object> LoginCommand { get; set; }
 
 		private string errorText;
@@ -40,8 +39,6 @@ namespace Client.ViewModel
 
 		private void Login(object parameter)
 		{
-			CurrentViewModel = new MainViewModel();
-
 			PasswordBox pass = parameter as PasswordBox;
 
 			LogInInfo loginInfo;
@@ -52,13 +49,15 @@ namespace Client.ViewModel
 
 			if (loginInfo == LogInInfo.Sucess)
 			{
+				Session.Current.LoggedInUser = Username;
+
 				MainWindow mw = new MainWindow();
 				mw.Show();
 
 				Application.Current.MainWindow.Close();
 				Application.Current.MainWindow = mw;
 
-				Session.Current.LoggedInUser = Username;
+				ClientLogger.Log("Successfully logged in.", Common.LogLevel.Info);
 			}
 			else
 			{
@@ -66,6 +65,8 @@ namespace Client.ViewModel
 					ErrorText = "Username or password is incorrect.";
 				else
 					ErrorText = "Account already connected.";
+
+				ClientLogger.Log("Unsuccessful login attempt.", Common.LogLevel.Error);
 			}
 		}
 	}

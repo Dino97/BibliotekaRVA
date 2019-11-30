@@ -22,6 +22,24 @@ namespace Biblioteka
 		void LogOut(string username);
 
 		[OperationContract]
+		UserInfo GetUserInfo(string username);
+
+		[OperationContract]
+		void EditUserInfo(string username, string firstName, string lastName);
+
+		[OperationContract]
+		bool CreateUser(string username, string password, string firstName, string lastName);
+
+		[OperationContract]
+		bool CreateBook(string name, string author, int publicationYear);
+
+		[OperationContract]
+		bool EditBook(string oldName, string newName, string author, int publicationYear);
+
+		[OperationContract]
+		bool DeleteBook(string name);
+
+		[OperationContract]
 		List<Book> GetBooks();
 
 		[OperationContract(IsOneWay = true)]

@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Common.Model
 {
+	public class UserInfo
+	{
+		public string Username { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+	}
+
 	public interface IUser
 	{
 		string Username { get; set; }

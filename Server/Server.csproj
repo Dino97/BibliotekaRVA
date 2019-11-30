@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LibraryDbContext.cs" />
-    <Compile Include="LibraryDbInitializer.cs" />
     <Compile Include="LibraryServices.cs" />
     <Compile Include="Migrations\201911240147519_init.cs" />
     <Compile Include="Migrations\201911240147519_init.Designer.cs">
@@ -66,6 +65,14 @@
     <Compile Include="Migrations\201911242307515_admin.cs" />
     <Compile Include="Migrations\201911242307515_admin.Designer.cs">
       <DependentUpon>201911242307515_admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911292151224_memberAsString.cs" />
+    <Compile Include="Migrations\201911292151224_memberAsString.Designer.cs">
+      <DependentUpon>201911292151224_memberAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911300328582_rmBookID.cs" />
+    <Compile Include="Migrations\201911300328582_rmBookID.Designer.cs">
+      <DependentUpon>201911300328582_rmBookID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -87,6 +94,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911242307515_admin.resx">
       <DependentUpon>201911242307515_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911292151224_memberAsString.resx">
+      <DependentUpon>201911292151224_memberAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911300328582_rmBookID.resx">
+      <DependentUpon>201911300328582_rmBookID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
